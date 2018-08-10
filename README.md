@@ -94,4 +94,4 @@ disable (data) { // 是否禁用该选项，不让选择
 }
 ```
 ## demo
-[演示](https://upload-images.jianshu.io/upload_images/10363634-40b393d210e86448.gif?imageMogr2/auto-orient/strip)
+![Image text](https://upload-images.jianshu.io/upload_images/10363634-40b393d210e86448.gif?imageMogr2/auto-orient/strip)
