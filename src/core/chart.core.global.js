@@ -1,56 +1,16 @@
-# 时间轴组件
+var Chart = require('./chart.core.js')
+var globalOptions = require('./chart.core.default.js')
 
-> 起步
-```
-import ceChart from 'ce-timelines'
-import helper  from 'ce-timelines/src/utils/index.js'
-
-var canvas = document.getElementById('canvas')
-var rate = []
-
-for(var i = 14; i <= 60; i++) {
-  var datetime = helper.time.getDate(i)
-  rate.push({
-    ticks: datetime.date, // 日期
-    days: i, // 第几天
-  })
-}
-var chart = new Chart('#canvas', {
-  options: {
-    width: '100%',
-    height: 90
-  },
-  data: {
-    type: 'timeline',
-    defaultDateDays: 7, //默认选择第三十天
-    range: rate,
-    onSelect (index, data) { // 选择回调
-      //console.log(index, data)
-    },
-    tickFormat (v) {
-      console.log(v)
-      return v
-    },
-    disable (d) { // 判断是否有检查需要disable,渲染组件颜色
-      return false
-    }
-  }
-})
-
-```
-
-## 配置选项
-
-```javascript
-{
+Chart.globals = globalOptions._set('global', {
   data: {
     type: 'timeline',
     defaultDateDays: 0, // 默认选中的天数
-    range: [] // 选择器的数据
+    range: []
+    // 默认刻度的现实尺寸
   },
   options: {
-    width: '100%', // canvas的默认宽度
-    height: 100  // canvas的默认高度
+    width: '100%',
+    height: 100
   },
   aixs: {
     ticksInterval: 10,    // 默认大小刻度之间间隔5个
@@ -78,20 +38,5 @@ var chart = new Chart('#canvas', {
     tickWidth: 5, // 刻度宽度
     strokeStyle: '#ff7500' // 指示器的线条颜色
   }
-}
-```
+})
 
-## 回调函数
-```
-onSelect (index, data) { // 选中的数据行，回调函数的的参数是 index 数据项的index值，data是选中的数据
-
-}
-tickFormat (v) { // 设置刻度尺的显示的回调函数
-  return v
-}
-disable (data) { // 是否禁用该选项，不让选择
-
-}
-```
-## demo
-[演示](https://upload-images.jianshu.io/upload_images/10363634-40b393d210e86448.gif?imageMogr2/auto-orient/strip)
