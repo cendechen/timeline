@@ -19,6 +19,11 @@ module.exports = element.extend({
     }
     return x
   },
+  drawShape () {
+    var me = this
+    me.ctx.fillStyle = 'rgba(16, 189, 77, 0.2)'
+    me.ctx.fillRect(0, 0, me.Config.options.width, me.Config.options.height)
+  },
   drawChartAixs () {
     var me = this
     var x = this.getDistance() // 获取滑动位置
@@ -75,9 +80,23 @@ module.exports = element.extend({
       ctx.fillStyle = me.Config.aixs.ticksValueDisableColor
     }
   },
+  drawTickText () {
+    // 最长存到
+    var me = this
+    const distance = this.getDistance() // 滑动的距离
+    const x = distance + me.Config.aixs.ticksInterval * me.ticks.range.length + 10
+    const data = me.ticks.range[me.ticks.range.length - 1]
+    const dateShow = data.ticks.replace(/^\d{4}\-(\d{2})\-(\d{2})$/, '$1月$2日')
+    const date = `最长存到${dateShow}`
+    me.ctx.textAlign = 'start'
+    me.ctx.fillStyle = '#9e9e9e'
+    me.ctx.fillText(date, x, me.Config.options.height - 5)
+  },
   draw (){
-    this.drawChartAixs()
+  //  this.drawChartAixs()
+   // this.drawShape()
     this.drawChartAixsTicks()
+    this.drawTickText()
   }
 })
 

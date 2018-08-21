@@ -135,7 +135,13 @@ module.exports = function (me) {
     return i
   }
   function updateRender () {
-    target.touchDistance = Math.floor(target.realDistance / me.Config.aixs.ticksInterval) * me.Config.aixs.ticksInterval
+    if (target.realDistance + me.Config.aixs.ticksInterval / 2 > 0) {
+      target.touchDistance = 0
+    } else {
+      target.touchDistance = Math.floor(target.realDistance / me.Config.aixs.ticksInterval) * me.Config.aixs.ticksInterval
+    }
+    //console.log(target.realDistance)
+    //target.touchDistance = Math.floor(target.realDistance / me.Config.aixs.ticksInterval) * me.Config.aixs.ticksInterval
     const index = getIndex()
     if (target.index !== index) {
       target.index = index

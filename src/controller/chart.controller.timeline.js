@@ -1,7 +1,7 @@
 var helpCanvas = require('../utils/helper.canvas.js')
 var helper = require('../utils/index.js')
 var ElementsAxis = require('../element/element.axis.js')
-var ElementsIndicator = require('../element//element.indicator.js')
+var ElementsIndicator = require('../element/element.indicator.js')
 var Chart = require('../core/chart.core.js')
 
 var timeline = function (chart) {

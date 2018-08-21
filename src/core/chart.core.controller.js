@@ -12,18 +12,21 @@ helper.extend(Chart.prototype, {
   construct (canvas, config = {}) {
     var me = this
     me.time = Date.now() // 初始化的时间戳
+    let canvaContaner
     // 初始化环境
-    if (typeof canvas === 'string') {
-      var canvasContainer = canvas
-      canvas = helper.event.createCanvas()
-      helper.event.$(canvasContainer).appendChild(canvas)
+    if (canvas instanceof HTMLElement) {
+      canvaContaner = canvas
+    } else {
+      canvaContaner = helper.event.$(canvas)
     }
+    let canvasDom = helper.event.createCanvas()
+    canvaContaner.appendChild(canvasDom)
     // 设置图表的参数
     me.uid = helper.uid()
-    me.canvas = canvas
-    me.ctx = canvas.getContext('2d')
+    me.canvas = canvasDom
+    me.canvaContaner = canvaContaner
+    me.ctx = canvasDom.getContext('2d')
     // 合成参数数据
-    console.log(Options.global)
     me.Config = helper.merge({}, Options.global, config)
     Chart.Instances[me.uid] = me
     // resize后的更新算法
@@ -44,8 +47,18 @@ helper.extend(Chart.prototype, {
     var Config = me.Config
     me.updateCanvas()
 
-    me.canvas.style.mask = 'linear-gradient(to right, rgba(0,0,0, 0) 20%, rgba(0,0,0,255) 50%, rgba(0,0,0,0) 80%)'
-    me.canvas.style['-webkit-mask'] = 'linear-gradient(to right, rgba(0,0,0, 0) 20%, rgba(0,0,0,255) 50%, rgba(0,0,0,0) 80%)'
+    me.canvaContaner.style.mask = 'linear-gradient(to right, rgba(0,0,0, 0) 10%, rgba(0,0,0,255) 50%, rgba(0,0,0,0) 90%)'
+    me.canvaContaner.style['-webkit-mask'] = 'linear-gradient(to right, rgba(0,0,0, 0) 10%, rgba(0,0,0,255) 50%, rgba(0,0,0,0) 90%)'
+    me.canvaContaner.style.position = 'relative'
+    var opacityDiv = document.createElement('div')
+    opacityDiv.style.backgroundColor = 'rgba(16, 189, 77, 0.1)'
+    opacityDiv.style.position = 'absolute'
+    opacityDiv.style.zIndex = 0;
+    opacityDiv.style.width = '100%'
+    opacityDiv.style.height = '100%'
+    me.canvaContaner.insertBefore(opacityDiv, me.canvas)
+    me.canvas.style.position = 'relative'
+    me.canvas.style.zIndex = 100
     // 初始化数据项
     me.data = Config.data
     me.getTicksMateData() // 设置坐标轴的数据
