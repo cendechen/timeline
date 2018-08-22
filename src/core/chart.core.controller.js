@@ -102,9 +102,12 @@ helper.extend(Chart.prototype, {
     // 返回数据
     me.data['axisLength'] = (me.data['range'].length - 1) * me.Config.aixs.ticksInterval
     // 数据刻度的format
-    console.log(me.data.tickFormat)
     me.data.tickFormat = me.data.tickFormat || function(v) {
       return v // 默认的tickFormat数据
+    }
+    me.data.tipsFormat = me.data.tipsFormat || function(v) {
+      const date = v.ticks;
+      return `最长保存到${date}`
     }
   }
 })

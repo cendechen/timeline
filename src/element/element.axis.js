@@ -86,11 +86,11 @@ module.exports = element.extend({
     const distance = this.getDistance() // 滑动的距离
     const x = distance + me.Config.aixs.ticksInterval * me.ticks.range.length + 10
     const data = me.ticks.range[me.ticks.range.length - 1]
-    const dateShow = data.ticks.replace(/^\d{4}\-(\d{2})\-(\d{2})$/, '$1月$2日')
-    const date = `最长存到${dateShow}`
-    me.ctx.textAlign = 'start'
-    me.ctx.fillStyle = '#9e9e9e'
-    me.ctx.fillText(date, x, me.Config.options.height - 5)
+    const showDate = me.ticks.tipsFormat(data)
+    me.ctx.textAlign = me.Config.aixs.overDateTextAlign
+    me.ctx.fillStyle = me.Config.aixs.overDateColor
+    me.ctx.font = me.Config.aixs.overDateFont
+    me.ctx.fillText(showDate, x, me.Config.options.height - me.Config.aixs.overDateBaseLine)
   },
   draw (){
   //  this.drawChartAixs()

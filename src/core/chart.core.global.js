@@ -28,7 +28,11 @@ Chart.globals = globalOptions._set('global', {
     ticksValueFont: '12px 微软雅黑', // 刻度默认的字体大小和
     ticksValueTextAlign: 'center',  // 字体默认的对齐方式
     overDistance: 100, // 默认可以多拖动一份
-    timer: 200 // 拖动结束后的滚动距离
+    timer: 200, // 拖动结束后的滚动距离
+    overDateColor: '#e9e9e9',
+    overDateBaseLine: 5, // 基线离地部分5像素
+    overDateTextAlign: 'start', // 文字对齐方式
+    overDateFont: '20px'
   },
   indicator: { // 指示器的颜色值
     lineWidth: 1, // 指示器的线宽度
